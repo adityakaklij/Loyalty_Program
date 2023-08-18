@@ -3,7 +3,7 @@ import './App.css';
 import { BrowserRouter as Router, Switch, Route, HashRouter,} from "react-router-dom";
 import Navbar from './Components/Navbar';
 import Home from './Components/Home';
-import Business from './Components/Business';
+import Admin from './Components/Admin';
 
 
 function App() {
@@ -19,14 +19,10 @@ function App() {
             <Home/>
           </Route>
 
-          <Route exact path="/Business">
-            <Business/>
+          <Route exact path="/Admin">
+            <Admin/>
           </Route>
-
-     
-
-
-          
+    
         </Switch>
 
     </div>
