@@ -1,0 +1,73 @@
+// /*
+
+//     Points will be assigned to the users.
+//     Functions
+//         DONE Claim points
+//         DONE Reedem points
+//         DONE Send Points (OnlyOwner)
+//         DONE Withdraw points (OnlyOwner)
+
+//         Register user
+//         Delist user (OnlyOwner)
+
+// */
+
+coco Loyalty
+
+// class User:
+//     field name String
+//     field points U64
+//     field check U64
+
+state persistent:
+    userBal Map[Address]U64
+    isUserRegistered Map[Address]Bool
+    owner Address
+
+endpoint deployer Seed!():
+    mutate owner <- Loyalty.State.owner:
+        owner = Address(Sender)
+
+endpoint invokable UserPoints(address Address) -> (point U64):
+    observe userBal <- Loyalty.State.userBal:
+        yield point userBal[address]
+
+endpoint invokable Registered(address Address) -> (res Bool):
+    observe isUserRegistered <- Loyalty.State.isUserRegistered:
+        yield res isUserRegistered[address]
+
+endpoint invokable owner() -> (res Address):
+    observe res <- Loyalty.State.owner
+
+endpoint invokable RegisterUser!():
+    var sender = Address(Sender)
+    mutate isUserRegistered <- Loyalty.State.isUserRegistered:
+        isUserRegistered[sender] = true
+
+// DeRegistering the user, Ony Owner.
+endpoint invokable DeRegisterUser!(address Address):
+    var sender = Address(Sender)
+    mutate owner <- Loyalty.State.owner:
+        if sender == owner:
+            mutate isUserRegistered <- Loyalty.State.isUserRegistered:
+                isUserRegistered[address] = false
+        else:
+            throw "Not a owner!"
+
+// Only register user & onlyowner
+endpoint invokable SendPoints!(address Address, points U64):
+    var sender = Address(Sender)
+    mutate owner <- Loyalty.State.owner:
+        mutate isUserRegistered <- Loyalty.State.isUserRegistered:
+            if isUserRegistered[address] == true:
+                if sender == owner:
+                    mutate userBal <- Loyalty.State.userBal:
+                        userBal[address] += points
+                else:
+                    throw "Not a owner!"
+
+endpoint invokable claimPoints!(amount U64):
+    var sender = Address(Sender)
+    mutate userBal <- Loyalty.State.userBal:
+        if userBal[sender] >= amount:       
+            userBal[sender] -= amount // Only reducing the points, Not sending to anywhere!
