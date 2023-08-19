@@ -50,9 +50,5 @@ We are committed to improving the Loyalty Program over time. Some planned enhanc
 
 - **Advanced Analytics**: We plan to provide users with insights into their point accumulation and redemption patterns.
 
-## Feedback and Support
-
-We welcome your feedback and suggestions for improving the Loyalty Program. If you encounter any issues or have questions, please contact our support team at support@loyaltyprogrammoi.com.
-
-Thank you for choosing the Loyalty Program on MOI Blockchain!
+## Screenshots
 
