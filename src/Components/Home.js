@@ -1,32 +1,45 @@
 import React, { useState } from 'react'
 import '../CSS/Btn.css'
+import {getPoint,registerUser,claim} from'../interface/request';
+import MnemonicModal from './Modal';
 // User Page
 
 function Home() {
   
-  // Register users (Btn + input fields (Address))
-  // Returns user bal (Btn + input fields)
-  // Redeem Points (Btn + input fields (Address, Amount))
 
   const [userAddress, setUserAddress] = useState() 
   const [userAddressForPoints, setUserAddressForPoints] = useState() 
   const [userRedeemPoints, setUserRedeemPoints] = useState()
   const [userRedeemAddress, setUserRedeemAddress] = useState()
 
+  const [pomsg,setpomsg]=useState("")
+  const[regmsg,setregmsg]=useState("")
+  const[redmsg,setredmsg]=useState("")
+
 
   const registerUserFun = async() => {
     // Code goes here
+    const result=await registerUser(userAddress);
+    setregmsg("User registered successfully!!")
+    console.log(result)
+
     console.log(userAddress)
     
   }
   
   const getUserPointsFun = async() => {
     // Code goes here
+    const point =await getPoint(userAddressForPoints);
+    setpomsg(`Points: ${point}`)
+    console.log("p",point)
     console.log(userAddressForPoints)
     
   }
   const redeemPointsFun = async() => {
     // Code goes here
+    const result= await claim(userRedeemAddress,userRedeemPoints)
+console.log(result)
+setredmsg(`${userRedeemPoints} points redeemed`)
     console.log(userRedeemPoints)
     console.log(userRedeemAddress)
 
@@ -47,14 +60,17 @@ function Home() {
   }
 
   return (
+    
     <>
       <h2>Home</h2>
       <br /><br /><br />
-      {/* Register User  */}
+      
       <div>
           <input type="text" onChange={getUserAddress} placeholder='Enter Address' />
           <button onClick={registerUserFun}>Register</button>
+          
       </div>
+      <div>{regmsg}</div>
       <hr />
 
       {/* Get user's points. Input filed might be optional.  */}
@@ -62,6 +78,8 @@ function Home() {
           <input type="text" onChange={getUserAddressForPoints} placeholder='Enter Address' />
           <button onClick={getUserPointsFun}>Get Points</button>
       </div>
+      <div>{pomsg}</div>
+      
       <hr />
 
       {/* Redeem Points*/}
@@ -70,6 +88,7 @@ function Home() {
           <input type="number" onChange={getUserRedeemPoints} placeholder='Enter Points' />
           <button onClick={redeemPointsFun}>Redeem Points</button>
       </div>
+      <div>{redmsg}</div>
       <hr />
 
 
