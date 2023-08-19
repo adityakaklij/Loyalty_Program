@@ -51,4 +51,12 @@ We are committed to improving the Loyalty Program over time. Some planned enhanc
 - **Advanced Analytics**: We plan to provide users with insights into their point accumulation and redemption patterns.
 
 ## Screenshots
+![image](https://github.com/sumithprabhu/Loyalty_Program/blob/main/Images/Screenshot%202023-08-19%20173749.png?raw=true)
+![image](https://github.com/sumithprabhu/Loyalty_Program/blob/main/Images/Screenshot%202023-08-19%20173842.png?raw=true)
+![image](https://github.com/sumithprabhu/Loyalty_Program/blob/main/Images/Screenshot%202023-08-19%20173131.png?raw=true)
+![image](https://github.com/sumithprabhu/Loyalty_Program/blob/main/Images/Screenshot%202023-08-19%20173206.png?raw=true)
+![image](https://github.com/sumithprabhu/Loyalty_Program/blob/main/Images/Screenshot%202023-08-19%20173243.png?raw=true)
+![image](https://github.com/sumithprabhu/Loyalty_Program/blob/main/Images/Screenshot%202023-08-19%20173354.png?raw=true)
+![image](https://github.com/sumithprabhu/Loyalty_Program/blob/main/Images/Screenshot%202023-08-19%20173442.png?raw=true)
+![image](https://github.com/sumithprabhu/Loyalty_Program/blob/main/Images/Screenshot%202023-08-19%20173736.png?raw=true)
 
