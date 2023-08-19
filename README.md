@@ -50,9 +50,13 @@ We are committed to improving the Loyalty Program over time. Some planned enhanc
 
 - **Advanced Analytics**: We plan to provide users with insights into their point accumulation and redemption patterns.
 
-## Feedback and Support
-
-We welcome your feedback and suggestions for improving the Loyalty Program. If you encounter any issues or have questions, please contact our support team at support@loyaltyprogrammoi.com.
-
-Thank you for choosing the Loyalty Program on MOI Blockchain!
+## Screenshots
+![image](https://github.com/sumithprabhu/Loyalty_Program/blob/main/Images/Screenshot%202023-08-19%20173749.png?raw=true)
+![image](https://github.com/sumithprabhu/Loyalty_Program/blob/main/Images/Screenshot%202023-08-19%20173842.png?raw=true)
+![image](https://github.com/sumithprabhu/Loyalty_Program/blob/main/Images/Screenshot%202023-08-19%20173131.png?raw=true)
+![image](https://github.com/sumithprabhu/Loyalty_Program/blob/main/Images/Screenshot%202023-08-19%20173206.png?raw=true)
+![image](https://github.com/sumithprabhu/Loyalty_Program/blob/main/Images/Screenshot%202023-08-19%20173243.png?raw=true)
+![image](https://github.com/sumithprabhu/Loyalty_Program/blob/main/Images/Screenshot%202023-08-19%20173354.png?raw=true)
+![image](https://github.com/sumithprabhu/Loyalty_Program/blob/main/Images/Screenshot%202023-08-19%20173442.png?raw=true)
+![image](https://github.com/sumithprabhu/Loyalty_Program/blob/main/Images/Screenshot%202023-08-19%20173736.png?raw=true)
 
