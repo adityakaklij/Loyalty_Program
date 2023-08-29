@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import '../CSS/Btn.css'
-import {getPoint,registerUser,claim} from'../interface/request';
+import {} from'../interface/request';
 import MnemonicModal from './Modal';
 import { Link } from 'react-scroll';
+import { VoyageProvider, Wallet, getLogicDriver } from "js-moi-sdk";
 // User Page
+
 
 function Home() {
   
@@ -18,29 +20,133 @@ function Home() {
   const[redmsg,setredmsg]=useState("")
 
 
+  const[tranhash,settranhash]=useState()
+
+  const[isregloading,setregloading]=useState(false)
+  const[ispoloading,setpoloading]=useState(false)
+  const[isredloading,setredloading]=useState(false)
+
+  
+
+const provider = new VoyageProvider("babylon");
+
+const initializeWallet = async () => {
+  const derivationPath = "m/44'/6174'/7020'/0/0";
+  const wallet = new Wallet(provider);
+  await wallet.fromMnemonic(
+    "dose inform tag fog turn cross brief faith umbrella delay tired proud",
+    derivationPath
+  );
+  return wallet;
+};
+
+  const registerUser = async (address) => {
+    let signer = await initializeWallet(provider);
+    const logicID =
+      "0x080000d90b5f4decd1fb3cf8e7e55f8b139a03b4636fcb42d31807da9f9ff81266d367";
+    const driver = await getLogicDriver(logicID, signer);
+  
+    const response = await driver.routines.RegisterUser([address]).send({
+      sender: signer.getAddress(),
+      fuelPrice: 1,
+      fuelLimit: 1000,
+    });
+  
+    try {
+      const receipt = await response.wait();
+      const hash= await receipt.ix_hash
+      console.log("ix_receipt: ", hash);
+     
+      // const result = await response.result();
+      // console.log("ix_result: ", result.output.point);
+      return hash;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  };
+
+  const getPoint = async (address) => {
+    let signer = await initializeWallet(provider);
+    const logicID =
+      "0x080000d90b5f4decd1fb3cf8e7e55f8b139a03b4636fcb42d31807da9f9ff81266d367";
+    const driver = await getLogicDriver(logicID, signer);
+  
+    const response = await driver.routines.UserPoints([address]).send({
+      sender: signer.getAddress(),
+      fuelPrice: 1,
+      fuelLimit: 1000,
+    });
+  
+    try {
+      const receipt = await response.wait();
+      console.log("ix_receipt: ", receipt);
+  
+      const result = await response.result();
+      console.log("ix_result: ", result.output.point);
+      return [result.output.point,receipt.ix_hash];
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  };
+
+  const claim = async (address, point) => {
+    let signer = await initializeWallet(provider);
+    const logicID =
+      "0x080000d90b5f4decd1fb3cf8e7e55f8b139a03b4636fcb42d31807da9f9ff81266d367";
+    const driver = await getLogicDriver(logicID, signer);
+  
+    const response = await driver.routines.claimPoints([address,point]).send({
+      sender: signer.getAddress(),
+      fuelPrice: 1,
+      fuelLimit: 1000,
+    });
+  
+    try {
+      const receipt = await response.wait();
+      console.log("ix_receipt: ", receipt);
+  
+      
+      return receipt.ix_hash;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  };
+  
   const registerUserFun = async() => {
     // Code goes here
+    setregloading(true)
     const result=await registerUser(userAddress);
-    setregmsg("User registered successfully!!")
-    console.log(result)
-
+    setregmsg(`User registered successfully!! `)
+    console.log("res:",result)
+    settranhash(result)
+    setregloading(false)
+    
     console.log(userAddress)
     
   }
   
   const getUserPointsFun = async() => {
     // Code goes here
+    setpoloading(true)
     const point =await getPoint(userAddressForPoints);
-    setpomsg(`Points: ${point}`)
+    setpomsg(`Points: ${point[0]}`)
     console.log("p",point)
+    settranhash(point[1])
+    setpoloading(false)
     console.log(userAddressForPoints)
     
   }
   const redeemPointsFun = async() => {
     // Code goes here
+    setredloading(true)
     const result= await claim(userRedeemAddress,userRedeemPoints)
 console.log(result)
 setredmsg(`${userRedeemPoints} points redeemed`)
+settranhash(result)
+setredloading(false)
     console.log(userRedeemPoints)
     console.log(userRedeemAddress)
 
@@ -60,6 +166,10 @@ setredmsg(`${userRedeemPoints} points redeemed`)
     setUserRedeemAddress(e.target.value);
   }
 
+  const ViewTrans=()=>
+{
+  window.open(`https://voyage.moi.technology/interaction/?${tranhash}`)
+}
   return (
     
     <div className='home'>
@@ -92,19 +202,37 @@ setredmsg(`${userRedeemPoints} points redeemed`)
       <div className='function-title'>Register yourself 👇</div>
       <div>
           <input type="text" onChange={getUserAddress} placeholder='Enter Address' />
-          <button onClick={registerUserFun}>Register</button>
+          <button onClick={registerUserFun}>{isregloading?<div class="spinner-border text-light" role="status">
+  <span class="sr-only"></span>
+</div> : "Register"}</button>
           
       </div>
       <div>{regmsg}</div>
+      {regmsg!= "" && (
+        <div>
+         
+          <button onClick={ViewTrans}>View Transaction</button>
+        
+        </div>
+      )}
       <hr />
 
       {/* Get user's points. Input filed might be optional.  */}
       <div className='function-title'>View your points balance 👀</div>
       <div>
           <input type="text" onChange={getUserAddressForPoints} placeholder='Enter Address' />
-          <button onClick={getUserPointsFun}>Get Points</button>
+          <button onClick={getUserPointsFun}>{ispoloading?<div class="spinner-border text-light" role="status">
+  <span class="sr-only"></span>
+</div> : "Get Points"}</button>
       </div>
       <div>{pomsg}</div>
+      {pomsg!= "" && (
+        <div>
+         
+          <button onClick={ViewTrans}>View Transaction</button>
+        
+        </div>
+      )}
       
       <hr />
 
@@ -113,9 +241,18 @@ setredmsg(`${userRedeemPoints} points redeemed`)
       <div>
           <input type="text" onChange={getUserRedeenAddress} placeholder='Enter Address' />
           <input type="number" onChange={getUserRedeemPoints} placeholder='Enter Points' />
-          <button onClick={redeemPointsFun}>Redeem Points</button>
+          <button onClick={redeemPointsFun}>{isredloading?<div class="spinner-border text-light" role="status">
+  <span class="sr-only"></span>
+</div> : "Redeem Points"}</button>
       </div>
       <div>{redmsg}</div>
+      {redmsg!= "" && (
+        <div>
+         
+          <button onClick={ViewTrans}>View Transaction</button>
+        
+        </div>
+      )}
       <hr />
       </div>
       
