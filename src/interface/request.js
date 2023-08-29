@@ -6,7 +6,7 @@ const initializeWallet = async () => {
   const derivationPath = "m/44'/6174'/7020'/0/0";
   const wallet = new Wallet(provider);
   await wallet.fromMnemonic(
-    "beauty water bubble charge luggage pony spell mixture crime family rapid return",
+    "artefact furnace melody sphere chunk axis judge domain bulb endorse mystery weekend",
     derivationPath
   );
   return wallet;
@@ -15,7 +15,7 @@ const initializeWallet = async () => {
 export const getPoint = async (address) => {
   let signer = await initializeWallet(provider);
   const logicID =
-    "0x0800006e36ca3218a2e7204348864dfc9348864a3254d11fbbb01d14e494a4ccf99755";
+    "0x0800003cb15d420b432f8a3f68f42820520af27fabc4c4d8feed3831532ad3caeacae6";
   const driver = await getLogicDriver(logicID, signer);
 
   const response = await driver.routines.UserPoints([address]).send({
@@ -37,10 +37,10 @@ export const getPoint = async (address) => {
   }
 };
 
-export const registerUser = async (address) => {
+export const registerUser = async (address,{sethash}) => {
   let signer = await initializeWallet(provider);
   const logicID =
-    "0x0800006e36ca3218a2e7204348864dfc9348864a3254d11fbbb01d14e494a4ccf99755";
+    "0x08000080590e9b78de02e36b9b9b8fec2fbd879080ff82cfbfab0ab64802b26833f432";
   const driver = await getLogicDriver(logicID, signer);
 
   const response = await driver.routines.RegisterUser([address]).send({
@@ -51,8 +51,8 @@ export const registerUser = async (address) => {
 
   try {
     const receipt = await response.wait();
-    console.log("ix_receipt: ", receipt);
-
+    console.log("ix_receipt: ", receipt.ix_hash);
+   await sethash(receipt.ix_hash)
     const result = await response.result();
     console.log("ix_result: ", result.output.point);
     return result;
@@ -65,7 +65,7 @@ export const registerUser = async (address) => {
 export const claim = async (address, point) => {
   let signer = await initializeWallet(provider);
   const logicID =
-    "0x0800006e36ca3218a2e7204348864dfc9348864a3254d11fbbb01d14e494a4ccf99755";
+    "0x0800003cb15d420b432f8a3f68f42820520af27fabc4c4d8feed3831532ad3caeacae6";
   const driver = await getLogicDriver(logicID, signer);
 
   const response = await driver.routines.claimPoints([address,point]).send({
@@ -93,7 +93,7 @@ export const claim = async (address, point) => {
 export const deregisterUser = async (address) => {
   let signer = await initializeWallet(provider);
   const logicID =
-    "0x0800006e36ca3218a2e7204348864dfc9348864a3254d11fbbb01d14e494a4ccf99755";
+    "0x0800003cb15d420b432f8a3f68f42820520af27fabc4c4d8feed3831532ad3caeacae6";
   const driver = await getLogicDriver(logicID, signer);
 
   const response = await driver.routines.DeRegisterUser([address]).send({
@@ -118,7 +118,7 @@ export const deregisterUser = async (address) => {
 export const send = async (address,point) => {
   let signer = await initializeWallet(provider);
   const logicID =
-    "0x0800006e36ca3218a2e7204348864dfc9348864a3254d11fbbb01d14e494a4ccf99755";
+    "0x0800003cb15d420b432f8a3f68f42820520af27fabc4c4d8feed3831532ad3caeacae6";
   const driver = await getLogicDriver(logicID, signer);
 
   const response = await driver.routines.SendPoints([address,point]).send({
