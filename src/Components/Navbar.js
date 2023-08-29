@@ -47,7 +47,9 @@ export default function Navbar() {
   }
   return (
     <div>
+
       <nav className="navbar navbar-expand-lg  ">
+      <div className="nav-title">MOILITY</div>
         <div className="container-fluid">
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ml-auto mb-2 mb-lg-0">
@@ -64,8 +66,8 @@ export default function Navbar() {
               </li>
             </ul>
           </div>
-          
         </div>
+        
       </nav>
     </div>
   );

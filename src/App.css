@@ -45,3 +45,18 @@
     transform: rotate(360deg);
   }
 }
+
+.nav-title{
+  color: #227C9D;
+  font-weight: bold;
+  font-size: 20px;
+  padding-left: 20px;
+}
+.navbar{
+  background-color: white;
+  
+}
+.navbar-nav{
+  padding-left: 50px;
+  color: #227C9D;
+}
