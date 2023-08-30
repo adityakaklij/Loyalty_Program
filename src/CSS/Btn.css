@@ -162,3 +162,8 @@ body {
     font-weight: bold;
     padding-bottom: 5px;
   }
+
+  .admin-page{
+    height: 92.1vh;
+    background: linear-gradient(white, #227C9D);
+  }
