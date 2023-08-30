@@ -22,7 +22,7 @@ function Admin() {
     const derivationPath = "m/44'/6174'/7020'/0/0";
     const wallet = new Wallet(provider);
     await wallet.fromMnemonic(
-      "dose inform tag fog turn cross brief faith umbrella delay tired proud",
+      "finger must nurse tribe result gasp cart torch inflict laugh olive broken",
       derivationPath
     );
     return wallet;
@@ -31,7 +31,7 @@ function Admin() {
   const deregisterUser = async (address) => {
     let signer = await initializeWallet(provider);
     const logicID =
-      "0x080000d90b5f4decd1fb3cf8e7e55f8b139a03b4636fcb42d31807da9f9ff81266d367";
+      "0x08000052b43bca875d72ed5c64d6bd5a9d6ec69ad54ac08453e3529b20b7a368476551";
     const driver = await getLogicDriver(logicID, signer);
   
     const response = await driver.routines.DeRegisterUser([address]).send({
@@ -55,7 +55,7 @@ function Admin() {
   const send = async (address,point) => {
     let signer = await initializeWallet(provider);
     const logicID =
-      "0x080000d90b5f4decd1fb3cf8e7e55f8b139a03b4636fcb42d31807da9f9ff81266d367";
+      "0x08000052b43bca875d72ed5c64d6bd5a9d6ec69ad54ac08453e3529b20b7a368476551";
     const driver = await getLogicDriver(logicID, signer);
   
     const response = await driver.routines.SendPoints([address,point]).send({
@@ -117,13 +117,13 @@ setpoloading(true)
 
 
   return (
-    <>
+    <div className='admin-page'>
         <h1>Admin</h1>
         <br /><br /><br /><br />
 
         {/* DeRegister User */}
         <div>
-            <input type="text" onChange={getDeRegisterAddress} placeholder='Enter Address' />
+            <input type="text" onChange={getDeRegisterAddress} placeholder='Enter Wallet Address' />
             <button onClick={deRegisterUser}>{isdregloading?<div class="spinner-border text-light" role="status">
   <span class="sr-only"></span>
 </div> : "Deregister User"}</button>
@@ -140,7 +140,7 @@ setpoloading(true)
 
         {/* Send Points to Users */}
         <div>
-            <input type="text" onChange={getSendAddress} placeholder='Enter Address' />
+            <input type="text" onChange={getSendAddress} placeholder='Enter Wallet Address' />
             <input type="number" onChange={getSendPoints} placeholder='Enter Points' />
             <button onClick={sendPoints}>{ispoloading?<div class="spinner-border text-light" role="status">
   <span class="sr-only"></span>
@@ -154,7 +154,7 @@ setpoloading(true)
         
         </div>
       )}
-    </>
+    </div>
   )
 }
 

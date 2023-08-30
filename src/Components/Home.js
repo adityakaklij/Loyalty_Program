@@ -34,7 +34,7 @@ const initializeWallet = async () => {
   const derivationPath = "m/44'/6174'/7020'/0/0";
   const wallet = new Wallet(provider);
   await wallet.fromMnemonic(
-    "dose inform tag fog turn cross brief faith umbrella delay tired proud",
+    "finger must nurse tribe result gasp cart torch inflict laugh olive broken",
     derivationPath
   );
   return wallet;
@@ -43,7 +43,7 @@ const initializeWallet = async () => {
   const registerUser = async (address) => {
     let signer = await initializeWallet(provider);
     const logicID =
-      "0x080000d90b5f4decd1fb3cf8e7e55f8b139a03b4636fcb42d31807da9f9ff81266d367";
+      "0x08000052b43bca875d72ed5c64d6bd5a9d6ec69ad54ac08453e3529b20b7a368476551";
     const driver = await getLogicDriver(logicID, signer);
   
     const response = await driver.routines.RegisterUser([address]).send({
@@ -69,7 +69,7 @@ const initializeWallet = async () => {
   const getPoint = async (address) => {
     let signer = await initializeWallet(provider);
     const logicID =
-      "0x080000d90b5f4decd1fb3cf8e7e55f8b139a03b4636fcb42d31807da9f9ff81266d367";
+      "0x08000052b43bca875d72ed5c64d6bd5a9d6ec69ad54ac08453e3529b20b7a368476551";
     const driver = await getLogicDriver(logicID, signer);
   
     const response = await driver.routines.UserPoints([address]).send({
@@ -94,7 +94,7 @@ const initializeWallet = async () => {
   const claim = async (address, point) => {
     let signer = await initializeWallet(provider);
     const logicID =
-      "0x080000d90b5f4decd1fb3cf8e7e55f8b139a03b4636fcb42d31807da9f9ff81266d367";
+      "0x08000052b43bca875d72ed5c64d6bd5a9d6ec69ad54ac08453e3529b20b7a368476551";
     const driver = await getLogicDriver(logicID, signer);
   
     const response = await driver.routines.claimPoints([address,point]).send({
@@ -201,7 +201,7 @@ setredloading(false)
       <hr />
       <div className='function-title'>Register yourself 👇</div>
       <div>
-          <input type="text" onChange={getUserAddress} placeholder='Enter Address' />
+          <input type="text" onChange={getUserAddress} placeholder='Enter Wallet Address' />
           <button onClick={registerUserFun}>{isregloading?<div class="spinner-border text-light" role="status">
   <span class="sr-only"></span>
 </div> : "Register"}</button>
@@ -220,7 +220,7 @@ setredloading(false)
       {/* Get user's points. Input filed might be optional.  */}
       <div className='function-title'>View your points balance 👀</div>
       <div>
-          <input type="text" onChange={getUserAddressForPoints} placeholder='Enter Address' />
+          <input type="text" onChange={getUserAddressForPoints} placeholder='Enter Wallet Address' />
           <button onClick={getUserPointsFun}>{ispoloading?<div class="spinner-border text-light" role="status">
   <span class="sr-only"></span>
 </div> : "Get Points"}</button>
@@ -239,7 +239,7 @@ setredloading(false)
       {/* Redeem Points*/}
       <div className='function-title'>Redeem your points 😍</div>
       <div>
-          <input type="text" onChange={getUserRedeenAddress} placeholder='Enter Address' />
+          <input type="text" onChange={getUserRedeenAddress} placeholder='Enter Wallet Address' />
           <input type="number" onChange={getUserRedeemPoints} placeholder='Enter Points' />
           <button onClick={redeemPointsFun}>{isredloading?<div class="spinner-border text-light" role="status">
   <span class="sr-only"></span>
