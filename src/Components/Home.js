@@ -34,7 +34,7 @@ const initializeWallet = async () => {
   const derivationPath = "m/44'/6174'/7020'/0/0";
   const wallet = new Wallet(provider);
   await wallet.fromMnemonic(
-    "finger must nurse tribe result gasp cart torch inflict laugh olive broken",
+    "wire test actual festival report apart tray frost welcome isolate tower avocado",
     derivationPath
   );
   return wallet;
@@ -43,7 +43,7 @@ const initializeWallet = async () => {
   const registerUser = async (address) => {
     let signer = await initializeWallet(provider);
     const logicID =
-      "0x08000052b43bca875d72ed5c64d6bd5a9d6ec69ad54ac08453e3529b20b7a368476551";
+      "0x0800002ff65adddc80e39a60dcfc6db8eca18d23b001115dc7f136c9cac48db342174d";
     const driver = await getLogicDriver(logicID, signer);
   
     const response = await driver.routines.RegisterUser([address]).send({
@@ -69,7 +69,7 @@ const initializeWallet = async () => {
   const getPoint = async (address) => {
     let signer = await initializeWallet(provider);
     const logicID =
-      "0x08000052b43bca875d72ed5c64d6bd5a9d6ec69ad54ac08453e3529b20b7a368476551";
+      "0x0800002ff65adddc80e39a60dcfc6db8eca18d23b001115dc7f136c9cac48db342174d";
     const driver = await getLogicDriver(logicID, signer);
   
     const response = await driver.routines.UserPoints([address]).send({
@@ -94,7 +94,7 @@ const initializeWallet = async () => {
   const claim = async (address, point) => {
     let signer = await initializeWallet(provider);
     const logicID =
-      "0x08000052b43bca875d72ed5c64d6bd5a9d6ec69ad54ac08453e3529b20b7a368476551";
+      "0x0800002ff65adddc80e39a60dcfc6db8eca18d23b001115dc7f136c9cac48db342174d";
     const driver = await getLogicDriver(logicID, signer);
   
     const response = await driver.routines.claimPoints([address,point]).send({
